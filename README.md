@@ -26,7 +26,7 @@ None
     ban_duration: "duration: 4h" # PROD eg. 10m for testing
 
   roles:
-    - crowdsec
+    - alf149.crowdsec
  
 ```
 ## TODO
