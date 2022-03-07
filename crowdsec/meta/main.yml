@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: crowdsec
+  author: Alf149
+  description: Install Crowdsec incl. hub, collections, scenarios, postoverflows, parsers, bouncers and prometheus endpoint.
+  license: license (GPL-2.0-or-later, MIT, etc)
+  min_ansible_version: 2.4
+  platforms:
+    # Not tested
+    # - name: Fedora
+    #    versions:
+    #    - 25
+    # Not tested
+    # - name: Debian
+    #   versions:
+    #     - stretch
+    #     - buster
+    #     - bullseye
+    - name: Ubuntu
+      versions:
+        - bionic # Not tested but should work
+        - focal
+  
