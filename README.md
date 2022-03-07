@@ -9,7 +9,6 @@ Testet on Ubuntu 20.04 LTS server
 
 ## Role Variables
 --------------
-
 Available variables with default values (see `defaults/main.yml`):
 
 ## Dependencies
@@ -32,8 +31,8 @@ None
 ```
 ## TODO
 ------
-Test on mere Debian based distros 
-Test on Redhat based distros 
+- Test on mere Debian based distros 
+- Test on Redhat based distros 
 
 
 
