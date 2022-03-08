@@ -1,11 +1,11 @@
 # Crowdsec
 =========
 
-Install Crowdsec incl. hub, collections, scenarios, postoverflows, parsers, bouncers and prometheus endpoint.
+This Ansibel roles installs Crowdsec incl. hub, collections, scenarios, postoverflows, parsers, bouncers and prometheus endpoint.
 
 ## Requirements
 ------------
-Testet on Ubuntu 20.04 LTS server
+Tested on Ubuntu 20.04 LTS server but should work on other (supported) versions of Ubuntu as well as other Debian derivates.
 
 ## Role Variables
 --------------
@@ -31,7 +31,7 @@ None
 ```
 ## TODO
 ------
-- Test on mere Debian based distros 
+- Test on more Debian based distros 
 - Test on Redhat based distros 
 
 
