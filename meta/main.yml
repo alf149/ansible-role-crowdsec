@@ -6,20 +6,17 @@ galaxy_info:
   license: license (MIT)
   min_ansible_version: 2.4
   platforms:
-    # Not tested
-    # - name: Fedora
-    #    versions:
-    #    - 25
-    # Not tested
-    # - name: Debian
-    #   versions:
-    #     - stretch
-    #     - buster
-    #     - bullseye
     - name: Ubuntu
       versions:
-        - bionic # Not tested but should work
+        - bionic 
         - focal
+    - name: EL
+      versions:
+        - '8'
+    - name: EL
+      versions:
+        - '8'
+  
   galaxy_tags:
     - server
     - security
