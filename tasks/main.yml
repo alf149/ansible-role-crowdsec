@@ -1,28 +1,11 @@
 ---
-- name: Update apt and install curl gnupg apt-transport-https
-  apt: 
-    update_cache: yes 
-    name:
-      - curl 
-      - gnupg 
-      - apt-transport-https
-    state: present
+- name: debian
+  include_tasks: debian.yml
+  when: ansible_os_family | lower == "debian"
 
-- name: Crowdsec Add GPG apt Key
-  apt_key:
-    url: https://packagecloud.io/crowdsec/crowdsec/gpgkey
-    state: present
-
-- name: Crowdsec Add Repository
-  apt_repository:
-    repo: "deb https://packagecloud.io/crowdsec/crowdsec/{{ ansible_distribution | lower  }} {{ansible_distribution_release | lower}} main"
-    state: present
-    
-- name: Crowdsec Apt update and install Crowdsec and Crowdsec-firewall-bouncer-iptables
-  apt: 
-    update_cache: yes 
-    name: "{{ crowdsec_services_install }}"
-    state: present
+- name: redhat 
+  include_tasks: redhat.yml
+  when: ansible_os_family | lower == "redhat"
 
 
 # Update / upgrade

@@ -1,0 +1,40 @@
+---
+
+- name: Dnf install iptables
+  dnf: 
+    name: 
+      - iptables-services 
+      - iptables-utils
+    state: present
+    update_cache: yes
+
+- name: Start iptables services
+  service:
+    name: iptables
+    state: started
+    enabled: yes
+
+- name: Crowdsec url bash installer - download
+  ansible.builtin.uri:
+    url: https://packagecloud.io/install/repositories/crowdsec/crowdsec/script.rpm.sh 
+    return_content: yes
+  register: rustup_installer
+
+- name: Crowdsec url bash installer - run script
+  ansible.builtin.shell:
+    cmd: sh -s -- -y
+    stdin: "{{ rustup_installer.content }}"
+
+- name: install Crowdsec
+  dnf: 
+    name: crowdsec
+    state: present
+    update_cache: yes
+
+# Cant be combined as in debian based. 
+# API key does not get updated if installed together
+- name: Crowdsec-firewall-bouncer
+  dnf: 
+    name: crowdsec-firewall-bouncer-iptables 
+    state: present
+    update_cache: yes
