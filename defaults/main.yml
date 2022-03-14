@@ -2,6 +2,7 @@
 crowdsec_services_install:
   - crowdsec                              # IDS
   - crowdsec-firewall-bouncer-iptables    # IPS
+  #- crowdsec-firewall-bouncer-nftables    # IPS
 
 crowdsec_services_start:
   - crowdsec                     # IDS

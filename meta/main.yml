@@ -8,14 +8,18 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - bionic 
-        - focal
+        - bionic  #16.04
+        - focal   #20.04
+        - impish  #21.10
+    - name: Debian
+      versions:
+        - bookworm # 11
+        - bullseye # 10
+    
     - name: EL
       versions:
-        - '8'
-    - name: EL
-      versions:
-        - '8'
+        - '8'   #Rocky & alma Linux og Oracle Linux
+        - '7'   #Oracle Linux
   
   galaxy_tags:
     - server
