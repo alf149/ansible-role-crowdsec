@@ -1,10 +1,4 @@
 --- 
-- name: Start iptables services
-  service:
-    name: iptables
-    state: started
-    enabled: yes
-
 - name: Update apt and install curl gnupg apt-transport-https
   apt: 
     update_cache: yes 
@@ -13,7 +7,20 @@
       - gnupg 
       - apt-transport-https
       - debian-archive-keyring
+      - nftables
     state: present
+
+- name: Stop iptables services
+  service:
+    name: iptables
+    state: stoped
+    enabled: no
+
+- name: Start nftables services
+  service:
+    name: nftables
+    state: started
+    enabled: yes
 
 - name: Crowdsec Add GPG apt Key
   apt_key:
@@ -25,8 +32,14 @@
     repo: "deb https://packagecloud.io/crowdsec/crowdsec/{{ ansible_distribution | lower  }} {{ansible_distribution_release | lower}} main"
     state: present
     
-- name: Crowdsec Apt update and install Crowdsec and Crowdsec-firewall-bouncer-iptables/nftables
+- name: Crowdsec Apt update and install Crowdsec 
   apt: 
     update_cache: yes 
-    name: "{{ crowdsec_services_install }}"
+    name: crowdsec
+    state: present
+
+- name: Crowdsec-firewall-bouncer-nftables
+  apt: 
+    update_cache: yes 
+    name: Crowdsec-firewall-bouncer-nftables
     state: present
