@@ -4,7 +4,22 @@ This Ansibel roles installs Crowdsec incl. hub, collections, scenarios, postover
 
 ## Requirements
 ------------
-Tested on a number of newer distros look at meta/main.yml to see wich.
+Tested on:
+  platforms:
+      - name: Ubuntu
+        versions:
+          - bionic  #16.04
+          - focal   #20.04
+          - impish  #21.10
+      - name: Debian
+        versions:
+          - bookworm # 11
+          - bullseye # 10
+      
+      - name: EL
+        versions:
+          - '8'   #Rocky & alma Linux og Oracle Linux
+          - '7'   #Oracle Linux
 
 ## Role Variables
 --------------
