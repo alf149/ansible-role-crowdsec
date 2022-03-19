@@ -1,6 +1,4 @@
 # Crowdsec
-=========
-
 This Ansibel roles installs Crowdsec incl. hub, collections, scenarios, postoverflows, parsers, bouncers and prometheus endpoint.
 
 ## Requirements
