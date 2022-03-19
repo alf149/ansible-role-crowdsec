@@ -51,10 +51,11 @@ None
 -------
 MiT
 
-## Author Information
-------------------
-Alf149
-
 ## Error reporting. 
 ------------------
 Use github issues or make at PR. 
+
+## Author Information
+------------------
+
+[Alf149](https://github.com/alf149) 
