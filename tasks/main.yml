@@ -15,7 +15,6 @@
     - ansible_os_family | lower == "redhat"
     - ansible_distribution_major_version == '7'
 
-
 # Update / upgrade
 - name: Crowdsec cscli hub update
   command:
@@ -34,7 +33,6 @@
   #   - "'All scenarios are already up-to-date' not in hub_upgrade_result.stderr_lines|join('\n')" 
   #   - "'All postoverflows are already up-to-date' not in hub_upgrade_result.stderr_lines|join('\n')" 
   # notify: Restart crowdsec
-    
     
 # collections
 - name: Crowdsec install collections
@@ -74,7 +72,6 @@
   when: scenarios_remove_list  | length > 0
   notify: Restart crowdsec
 
-
 # parsers
 - name: Crowdsec install parsers
   command:
@@ -93,7 +90,6 @@
   changed_when: "'sudo systemctl reload crowdsec' in parsers_remove_result.stderr"
   when: parsers_remove_list  | length > 0
   notify: Restart crowdsec
-
 
 # postoverflows
 - name: Crowdsec install postoverflows

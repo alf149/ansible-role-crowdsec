@@ -13,16 +13,12 @@
     group: root
     mode: 0644
 
-# Cant be combined as in debian based. 
-# API key does not get updated if installed together
 - name: install Crowdsec
   dnf: 
     name: crowdsec
     state: present
     update_cache: yes
 
-# Cant be combined as in debian based. 
-# API key does not get updated if installed together
 - name: Crowdsec-firewall-bouncer-nftables
   dnf: 
     name: crowdsec-firewall-bouncer-nftables 
