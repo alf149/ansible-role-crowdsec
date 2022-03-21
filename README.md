@@ -17,15 +17,24 @@ Tested on:
       
       - name: EL
         versions:
-          - '8'   #Rocky & alma Linux og Oracle Linux
+          - '8'   #Rocky & alma Linux and Oracle Linux
           - '7'   #Oracle Linux
 ```
 
-## Role Variables
-Available variables with default values (see `defaults/main.yml`):
+## how to install.
+I use ansible-galaxy do make a requirements.yml
+```yaml
+roles:
+  - geerlingguy.security
+  - alf149.crowdsec
+```
+And run 
+`ansible-galaxy install -r requirements.yml` This wil import this role to your ansible projekt. 
 
-## Dependencies
-None
+
+## Role Variables
+Available variables with default values (see `defaults/main.yml`)
+variables can be host specific in group_vars/host.yml
 
 ## Example Playbook
 ```yaml
@@ -38,15 +47,17 @@ None
     - alf149.crowdsec 
 ```
 
+## Manual tasks could be handy
+ansible HOST -m shell -a "sudo cscli parsers install crowdsecurity/whitelists --force"
+ansible 'group' -m shell -a "sudo cscli parsers remove crowdsecurity/whitelists --force"
+ansible 'group' -m shell -a "sudo systemctl reload crowdsec"
+
 ## TODO
-- Test on Windows server when crowdsec makes a signed version. 
+- Test on Windows server  
 - Maby autodetect nftables/iptables and load the correct bouncer. 
 
-## License
-MiT
-
 ## Error reporting. 
-Use github issues or make at PR. 
+Use github issues or make a PR. 
 
 ## Author Information
 ------------------
