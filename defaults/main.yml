@@ -1,65 +1,69 @@
 ---
 crowdsec_services_install:
   - crowdsec                              # IDS
-  - crowdsec-firewall-bouncer-nftables    # IPS
-  #- crowdsec-firewall-bouncer-iptables    # IPS
+  - crowdsec-firewall-bouncer-iptables    # IPS
+#  - crowdsec-firewall-bouncer-nftables    # IPS
 
 crowdsec_services_start:
   - crowdsec                     # IDS
   - crowdsec-firewall-bouncer    # IPS
 
-collections_list:
-  - crowdsecurity/nginx
-  - crowdsecurity/apache2 
-  - crowdsecurity/sshd
+crowdsec_collections_list:
   - crowdsecurity/linux
-  - crowdsecurity/iptables
-  - crowdsecurity/http-cve
+#  - crowdsecurity/sshd
+#  - crowdsecurity/nginx
+#  - crowdsecurity/apache2
+#  - crowdsecurity/wordpress
+#  - crowdsecurity/nextcloud
+#  - crowdsecurity/postfix
+#  - crowdsecurity/dovecot
+#  - crowdsecurity/iptables
+#  - fulljackz/proxmox
+#  - fulljackz/pureftpd
 
-collections_remove_list: []
-# eg. 
-# collections_remove_list: 
-#   - crowdsecurity/http-cve
+crowdsec_collections_remove_list: []
+#collections_remove_list: 
+#  - crowdsecurity/http-cve
 
-scenarios_list:
-  - crowdsecurity/apache_log4j2_cve-2021-44228
-  - crowdsecurity/http-cve-2021-42013
+crowdsec_scenarios_list: []
+#scenarios_list:
+#  - crowdsecurity/apache_log4j2_cve-2021-44228
+#  - crowdsecurity/http-cve-2021-42013
 
-scenarios_remove_list: []
-# eg.
-# scenarios_remove_list: 
-#   - crowdsecurity/apache_log4j2_cve-2021-44228
+crowdsec_scenarios_remove_list: []
+#scenarios_remove_list: 
+#  - crowdsecurity/apache_log4j2_cve-2021-44228
 
-parsers_list:
-  - crowdsecurity/docker-logs
-  - crowdsecurity/apache2-logs
-  - crowdsecurity/whitelists
+crowdsec_parsers_list: []
+#parsers_list:
+#  - crowdsecurity/docker-logs
+#  - crowdsecurity/apache2-logs
+#  - crowdsecurity/whitelists
 
-parsers_remove_list: []
-# eg. 
-# parsers_remove_list: 
-#   - crowdsecurity/whitelists
+crowdsec_parsers_remove_list: []
+#parsers_remove_list: 
+#  - crowdsecurity/whitelists
 
-postoverflows_list:
-  - crowdsecurity/cdn-whitelist
-  - crowdsecurity/seo-bots-whitelist
+crowdsec_postoverflows_list: []
+#postoverflows_list:
+#  - crowdsecurity/cdn-whitelist
+#  - crowdsecurity/seo-bots-whitelist
 
-postoverflows_remove_list: []
-# eg. 
-# postoverflows_remove_list: 
-#   - crowdsecurity/seo-bots-whitelist
+crowdsec_postoverflows_remove_list: []
+#postoverflows_remove_list: 
+#  - crowdsecurity/seo-bots-whitelist
 
-ban_duration: "duration: 4h" # PROD eg. 10m for testing
+crowdsec_ban_duration: "duration: 4h" # PROD eg. 10m for testing
 
-prometheus_endpoint: "enabled: true"
+crowdsec_prometheus_endpoint: "enabled: false"
 
-acquis_addon: |
-      ---
-      source: journalctl
-      journalctl_filter:
-        - "_SYSTEMD_UNIT=ssh.service"
-      labels:
-        type: journald"
-      ---
+#crowdsec_acquis_addon: |
+#      ---
+#      source: journalctl
+#      journalctl_filter:
+#        - "_SYSTEMD_UNIT=ssh.service"
+#      labels:
+#        type: journald"
+#      ---
 
 
