@@ -12,8 +12,8 @@ Tested on:
           - impish  #21.10
       - name: Debian
         versions:
-          - bookworm # 11
-          - bullseye # 10
+          - bookworm # 12
+          - bullseye # 11
       
       - name: EL
         versions:
