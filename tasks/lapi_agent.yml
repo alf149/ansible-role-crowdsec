@@ -1,0 +1,40 @@
+---
+- name: Crowdsec - ajust /etc/crowdsec/config.yaml listen_uri lapi
+  replace:
+    path: "/etc/crowdsec/config.yaml"
+    regexp: 'listen_uri: 127.0.0.1:8080'
+    replace: "listen_uri: {{ crowdsec_lapi_ip }}:8080"
+    backup: yes  
+    
+- name: Crowdsec - local_api_credentials.yaml template for lapi server
+  template:
+    src: templates/cs_local_api_credentials.j2
+    dest:  /etc/crowdsec/local_api_credentials.yaml
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Crowdsec - copy /lib/systemd/system/crowdsec.service
+  copy:
+    src: /lib/systemd/system/crowdsec.service
+    dest: /etc/systemd/system/crowdsec.service
+    remote_src: yes
+
+- name: Crowdsec - edit /etc/systemd/system/crowdsec.service -no-api on agent
+  replace:
+    path: "/etc/systemd/system/crowdsec.service"
+    regexp: 'ExecStart=/usr/bin/crowdsec -c /etc/crowdsec/config.yaml'
+    replace: 'ExecStart=/usr/bin/crowdsec -c /etc/crowdsec/config.yaml -no-api'
+    backup: yes
+
+- name: crowdsec  - daemon reload and restart
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: yes
+    name: crowdsec
+
+- name: Crowdsec - enable  and  start services
+  service:
+    name: crowdsec
+    state: started
+    enabled: true

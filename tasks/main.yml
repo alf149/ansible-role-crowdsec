@@ -26,7 +26,9 @@
     update_cache: yes
     name: crowdsec-firewall-bouncer-nftables
     state: present
-  when: crowdsec_install_firewall_bouncer == true 
+  when: 
+    - crowdsec_install_firewall_bouncer == true 
+    - ansible_os_family | lower == "debian"
 
 - name: Crowdsec-firewall-bouncer-iptables
   package: 
@@ -57,7 +59,7 @@
   with_items: "{{ cs_collections_list }}"
   register: collections_install_result
   changed_when: "'overwrite' not in collections_install_result.stderr"
-  when: cs_collections_list  | length > 0
+  when: cs_collections_list | length > 0
 
 - name: crowdsec - remove collections
   command:
@@ -65,7 +67,7 @@
   with_items: "{{ cs_collections_remove_list }}"
   register: collections_remove_result
   changed_when: "'sudo systemctl reload crowdsec' in collections_remove_result.stderr"
-  when: cs_collections_remove_list  | length > 0
+  when: cs_collections_remove_list | length > 0
 
 # scenarios
 - name: crowdsec - install scenarios
@@ -74,7 +76,7 @@
   with_items: "{{ cs_scenarios_list }}"
   register: scenarios_install_result
   changed_when: "'overwrite' not in scenarios_install_result.stderr"
-  when: cs_scenarios_list  | length > 0
+  when: cs_scenarios_list | length > 0
 
 - name: crowdsec - remove scenarios
   command:
@@ -82,7 +84,7 @@
   with_items: "{{ cs_scenarios_remove_list }}"
   register: scenarios_remove_result
   changed_when: "'sudo systemctl reload crowdsec' in scenarios_remove_result.stderr"
-  when: cs_scenarios_remove_list  | length > 0
+  when: cs_scenarios_remove_list | length > 0
 
 # parsers
 - name: crowdsec - install parsers
@@ -91,7 +93,7 @@
   with_items: "{{ cs_parsers_list }}"
   register: parsers_install_result
   changed_when: "'overwrite' not in parsers_install_result.stderr"
-  when: cs_parsers_list  | length > 0
+  when: cs_parsers_list | length > 0
 
 - name: crowdsec - remove parsers
   command:
@@ -99,7 +101,7 @@
   with_items: "{{ cs_parsers_remove_list }}"
   register: parsers_remove_result
   changed_when: "'sudo systemctl reload crowdsec' in parsers_remove_result.stderr"
-  when: cs_parsers_remove_list  | length > 0
+  when: cs_parsers_remove_list | length > 0
 
 # postoverflows
 - name: crowdsec - install postoverflows
@@ -108,7 +110,7 @@
   with_items: "{{ cs_postoverflows_list }}"
   register: postoverflows_install_result
   changed_when: "'overwrite' not in postoverflows_install_result.stderr"
-  when: cs_postoverflows_list  | length > 0
+  when: cs_postoverflows_list | length > 0
 
 - name: crowdsec - remove postoverflows
   command:
@@ -116,7 +118,7 @@
   with_items: "{{ cs_postoverflows_remove_list }}"
   register: postoverflows_remove_result
   changed_when: "'sudo systemctl reload crowdsec' in postoverflows_remove_result.stderr"
-  when: cs_postoverflows_remove_list  | length > 0
+  when: cs_postoverflows_remove_list | length > 0
 
 ### Config files
 - name: crowdsec - enable/disable the Prometheus endpoint
@@ -163,3 +165,18 @@
     enabled: true
   when: 
     - crowdsec_install_firewall_bouncer == true 
+
+### ------------ ####
+# Muti server setup #
+
+- name: Crowdsec - LAPI server setup 
+  include_tasks: lapi_server.yml
+  when: 
+    - inventory_hostname in groups["cs_lapi_server"]
+
+- name: Crowdsec - LAPI agent setup 
+  include_tasks: lapi_agent.yml
+  when: 
+    - inventory_hostname in groups["cs_agents"]
+
+  

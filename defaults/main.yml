@@ -64,14 +64,25 @@ cs_parsers_mywhitelists_cidr: |
   - "192.168.0.0/16"
   - "10.0.0.0/8"
 
-# LAPI server 
+# LAPI server in host vars...
 # enable_crowdsec: true
 # crowdsec_install_firewall_bouncer: true
+# crowdsec_lapi_server: true
 # crowdsec_lapi_agent: true
 # crowdsec_lapi_ip: 192.168.56.11
 # crowdsec_agent_hosts: 
 #   - srv02.test
 #   - srv03.test
 #   - srv04.test
-# crowdsec_agent_hosts_password: 'Changeme2022!'
+# crowdsec_agent_hosts_password: 'VeryLongPasswordShouldBeRandomChangeme2022!'
+# crowdsec_psql_db_user: crowdsec
+# crowdsec_psql_db_password: 'VeryLongPasswordPsqlChangeme2022!'
+# crowdsec_psql_db_name: crowdsec
+
+# LAPI agent in host vars...
+# enable_crowdsec: true
+# crowdsec_install_firewall_bouncer: true
+# crowdsec_lapi_agent: true
+# crowdsec_lapi_ip: 192.168.56.11
+# crowdsec_agent_hosts_password: 'VeryLongPasswordShouldBeRandomChangeme2022!'
 
