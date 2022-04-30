@@ -1,0 +1,11 @@
+name: mywhitelists
+description: "Whitelist events from my ip addresses"
+whitelist:
+  reason: "my ip ranges"
+  ip:
+    - "127.0.0.1"
+    - "::1"
+    {{ cs_parsers_mywhitelists_ip }}
+  cidr: 
+    {{ cs_parsers_mywhitelists_cidr }}
+    

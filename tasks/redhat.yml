@@ -12,15 +12,3 @@
     owner: root
     group: root
     mode: 0644
-
-- name: install Crowdsec
-  dnf: 
-    name: crowdsec
-    state: present
-    update_cache: yes
-
-- name: Crowdsec-firewall-bouncer-nftables
-  dnf: 
-    name: crowdsec-firewall-bouncer-nftables 
-    state: present
-    update_cache: yes

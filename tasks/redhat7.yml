@@ -1,6 +1,6 @@
 ---
 - name: iptables
-  yum: 
+  package: 
     name: 
       - pygpgme
       - yum-utils 
@@ -21,15 +21,4 @@
     owner: root
     group: root
     mode: 0644
-
-- name: install Crowdsec
-  yum: 
-    name: crowdsec
-    state: present
-    update_cache: yes
-
-- name: Crowdsec-firewall-bouncer-iptables
-  yum: 
-    name: crowdsec-firewall-bouncer-iptables 
-    state: present
-    update_cache: yes
+    

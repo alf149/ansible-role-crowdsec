@@ -2,6 +2,8 @@
 This ansible roles installs Crowdsec incl. hub, collections, scenarios, postoverflows, parsers, bouncers and prometheus endpoint.
 
 ## Requirements
+Ansible master running version 2.12 
+
 Tested on:
 ```yaml
   platforms:
@@ -41,7 +43,7 @@ variables can be host specific in group_vars/host.yml
 - hosts: all
 
   vars:
-    ban_duration: "duration: 4h" # PROD eg. 10m for testing
+    cs_ban_duration: "duration: 4h" # PROD eg. 10m for testing
 
   roles:
     - alf149.crowdsec 

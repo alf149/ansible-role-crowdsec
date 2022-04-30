@@ -4,17 +4,18 @@ galaxy_info:
   author: Alf149
   description: This Ansibel roles installs Crowdsec incl. hub, collections, scenarios, postoverflows, parsers, bouncers and prometheus endpoint.
   license: license (MIT)
-  min_ansible_version: '2.4'
+  min_ansible_version: '2.12'
   platforms:
     - name: Ubuntu
       versions:
-        - bionic  #16.04
-        - focal   #20.04
+        - bionic  #18.04 LTS
+        - focal   #20.04 LTS
         - impish  #21.10
+        - jammy   #22.04 LTS Not tested
     - name: Debian
       versions:
-        - bookworm # 11
-        - bullseye # 10
+        - bookworm # 12
+        - bullseye # 11
     - name: EL
       versions:
         - '8'   #Rocky & alma Linux og Oracle Linux
