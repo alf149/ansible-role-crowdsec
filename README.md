@@ -7,20 +7,20 @@ Ansible master running version 2.12
 Tested on:
 ```yaml
   platforms:
-      - name: Ubuntu
-        versions:
-          - bionic  #16.04
-          - focal   #20.04
-          - impish  #21.10
-      - name: Debian
-        versions:
-          - bookworm # 11
-          - bullseye # 10
-      
-      - name: EL
-        versions:
-          - '8'   #Rocky & alma Linux and Oracle Linux
-          - '7'   #Oracle Linux
+    - name: Ubuntu
+      versions:
+        - bionic  #18.04 LTS
+        - focal   #20.04 LTS
+        - impish  #21.10
+        - jammy   #22.04 LTS Not tested
+    - name: Debian
+      versions:
+        - bookworm # 12
+        - bullseye # 11
+    - name: EL
+      versions:
+        - '8'   #Rocky & alma Linux og Oracle Linux
+        - '7'   #Oracle Linux
 ```
 
 ## how to install.
