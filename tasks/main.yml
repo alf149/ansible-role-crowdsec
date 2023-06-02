@@ -5,37 +5,37 @@
 
 - name: redhat8
   include_tasks: redhat.yml
-  when: 
+  when:
     - ansible_os_family | lower == "redhat"
     - ansible_distribution_major_version == '8'
 
 - name: redhat7
   include_tasks: redhat7.yml
-  when: 
+  when:
     - ansible_os_family | lower == "redhat"
     - ansible_distribution_major_version == '7'
 
-- name: Apt update and install Crowdsec 
-  package: 
-    update_cache: yes 
+- name: Apt update and install Crowdsec
+  package:
+    update_cache: yes
     name: crowdsec
     state: present
 
 - name: Crowdsec-firewall-bouncer-nftables
-  package: 
+  package:
     update_cache: yes
     name: crowdsec-firewall-bouncer-nftables
     state: present
-  when: 
-    - crowdsec_install_firewall_bouncer == true 
+  when:
+    - crowdsec_install_firewall_bouncer == true
     - ansible_os_family | lower == "debian"
 
 - name: Crowdsec-firewall-bouncer-iptables
-  package: 
+  package:
     update_cache: yes
-    name: crowdsec-firewall-bouncer-iptables 
+    name: crowdsec-firewall-bouncer-iptables
     state: present
-  when: 
+  when:
     - ansible_os_family | lower == "redhat"
     - ansible_distribution_major_version == '7'
     - crowdsec_install_firewall_bouncer == true
@@ -48,10 +48,10 @@
 
 - name: cscli hub upgrade
   command:
-    cmd: cscli hub upgrade 
+    cmd: cscli hub upgrade
   register: hub_upgrade_result
   changed_when: false
-    
+
 # collections
 - name: crowdsec - install collections
   command:
@@ -89,7 +89,7 @@
 # parsers
 - name: crowdsec - install parsers
   command:
-    cmd: "sudo cscli parsers install {{ item }}" 
+    cmd: "sudo cscli parsers install {{ item }}"
   with_items: "{{ cs_parsers_list }}"
   register: parsers_install_result
   changed_when: "'overwrite' not in parsers_install_result.stderr"
@@ -155,7 +155,7 @@
     name: crowdsec
     state: started
     enabled: true
-  when: 
+  when:
     - enable_crowdsec == true
 
 - name: crowdsec-firewall-bouncer enable  and  start services
@@ -163,20 +163,18 @@
     name: crowdsec-firewall-bouncer
     state: started
     enabled: true
-  when: 
-    - crowdsec_install_firewall_bouncer == true 
+  when:
+    - crowdsec_install_firewall_bouncer == true
 
 ### ------------ ####
 # Muti server setup #
 
-- name: Crowdsec - LAPI server setup 
+- name: Crowdsec - LAPI server setup
   include_tasks: lapi_server.yml
-  when: 
-    - inventory_hostname in groups["cs_lapi_server"]
+  when:
+    - groups["cs_lapi_server"] is defined and inventory_hostname in groups["cs_lapi_server"]
 
-- name: Crowdsec - LAPI agent setup 
+- name: Crowdsec - LAPI agent setup
   include_tasks: lapi_agent.yml
-  when: 
-    - inventory_hostname in groups["cs_agents"]
-
-  
+  when:
+    - groups["cs_agents"] is defined and inventory_hostname in groups["cs_agents"]
