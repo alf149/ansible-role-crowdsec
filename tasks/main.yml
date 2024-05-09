@@ -3,11 +3,11 @@
   include_tasks: debian.yml
   when: ansible_os_family | lower == "debian"
 
-- name: redhat8
+- name: redhat>7
   include_tasks: redhat.yml
   when: 
     - ansible_os_family | lower == "redhat"
-    - ansible_distribution_major_version == '8'
+    - ansible_distribution_major_version >= '8'
 
 - name: redhat7
   include_tasks: redhat7.yml

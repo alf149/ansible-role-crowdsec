@@ -18,6 +18,7 @@ galaxy_info:
         - bullseye # 11
     - name: EL
       versions:
+        - '9'   #Rocky & alma Linux og Oracle Linux
         - '8'   #Rocky & alma Linux og Oracle Linux
         - '7'   #Oracle Linux
   galaxy_tags:
